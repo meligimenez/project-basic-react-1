@@ -30,14 +30,14 @@ export const MyShowHideMessage = () => {
             <Button onClick={changeImg} style={{ backgroundColor: 'pink', border: '2px solid #ff009e' }}>Cambiar</Button>
           </div>
 
-          <Button className="mb-2" variant={show ? 'danger' : 'success'} onClick={handleShowMessage} >
+          <Button className="mb-2" variant={show ? 'danger' : 'info'} onClick={handleShowMessage} >
             {show ? 'Chauu' : 'Saluda al pingüi'}
           </Button>
           <Toast show={show} onClose={handleShowMessage} className="d-flex flex-column m-auto">
             <Toast.Header>
               <strong className="me-auto">ReactJS</strong>
             </Toast.Header>
-            <Toast.Body>Primera Clase
+            <Toast.Body>
               <img src='https://i.pinimg.com/originals/3e/c8/89/3ec889aa31e793cf94f3f7cc30646757.gif' className="w-100" />
             </Toast.Body>
           </Toast>
