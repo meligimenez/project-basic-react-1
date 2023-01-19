@@ -1,0 +1,34 @@
+.inputMyProgress:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 158, 25%);
+  border: 1px solid #ff009e;
+}
+
+.progressContainer {
+  position: relative;
+  width: 100%;
+  height: 18px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #ff009e;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bar {
+  background-color: rgb(255, 255, 255, 0.7);
+  height: 20px;
+  border-radius: 3px;
+  transition: width 800ms ease-in-out;
+}
+
+.number {
+  position: absolute;
+  font-size: .9rem;
+  line-height: 1rem;
+  width: 100%;
+  font-weight: lighter;
+  user-select: none;
+}
