@@ -9,12 +9,13 @@ export const MyProgressBar = () => {
   const [intervalState, setIntervalState] = useState(null)
   const inputRef = useRef(null)
   const [btnDisable, setBtnDisable] = useState(true)
-  const [showModal, setShowModal] = useState(false)
+  const [showModalError, setShowModalError] = useState(false)
+  const [showModalSuccess, setShowModalSuccess] = useState(false)
 
   const handleDownload = () => {
     const valueInput = inputRef.current?.value;
     const isValueValid = !isNaN(valueInput) && valueInput > 0 && valueInput <= 100;
-    setShowModal(!isValueValid)
+    setShowModalError(!isValueValid)
 
     if (intervalState) {
       clearInterval(intervalState)
@@ -25,6 +26,7 @@ export const MyProgressBar = () => {
         setNow((now) => {
           if (now === +valueInput) {
             clearInterval(interval)
+            setShowModalSuccess(true)
             return now
           }
           return now + 1
@@ -34,6 +36,7 @@ export const MyProgressBar = () => {
     } else {
       handleReset()
     }
+    console.log(+valueInput)
   }
 
   const handleReset = () => {
@@ -42,11 +45,13 @@ export const MyProgressBar = () => {
   }
 
   const handleChange = ({ target: { value } }) => {
-    setBtnDisable(!!!+value)
+    const valueNumber = Number(value)
+    setBtnDisable(isNaN(valueNumber) || valueNumber <= 0)
   }
 
   const handleClose = () => {
-    setShowModal()
+    setShowModalError()
+    setShowModalSuccess()
   }
 
 
@@ -68,19 +73,34 @@ export const MyProgressBar = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Modal show={showModal} onHide={handleClose}>
+        <Modal show={showModalError} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Mensaje..</Modal.Title>
+            <Modal.Title>Error</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <>
               {/* cuando termine la carga que mande un mensaje y mas estilo a la barra nuestra */}
               <h2 className="text-danger text-center py-4">
-                ERROR.. ❌
+                ❌
               </h2>
               <p className="text-muted fs-4 text-center">
-                Solo se acepta valores numéricos. El valor debe ser
-                mayor a 0 y menor o igual a 100.
+                Inserte un valor de 0 a 100.
+              </p>
+            </>
+          </Modal.Body>
+        </Modal>
+        <Modal show={showModalSuccess} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Descarga completa</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <>
+              {/* cuando termine la carga que mande un mensaje y mas estilo a la barra nuestra */}
+              <h2 className="text-center py-4">
+                ✔
+              </h2>
+              <p className="text-muted fs-4 text-center">
+                Siiiii! Descarga exitosa :)
               </p>
             </>
           </Modal.Body>
