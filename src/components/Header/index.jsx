@@ -22,7 +22,7 @@ export const Header = () => {
                 Progress Bar
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/">
+              <NavDropdown.Item as={Link} to="/stopwatch">
                 Stopwatch / Timmer
               </NavDropdown.Item>
               <NavDropdown.Divider />
@@ -31,11 +31,11 @@ export const Header = () => {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Mis practicas" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/myShowHideMessage">
+              <NavDropdown.Item as={Link} to="/myPractices/myShowHideMessage">
                 My Show / Hide Message
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/myProgressBar">
+              <NavDropdown.Item as={Link} to="/myPractices/myProgressBar">
                 My Progress Bar
               </NavDropdown.Item>
               <NavDropdown.Divider />

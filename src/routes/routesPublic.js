@@ -2,8 +2,9 @@ import { Error404 } from '../components/Error404'
 import { Home } from '../components/Home'
 import { ProgressBar } from '../components/ProgressBar'
 import { ShowHideMessage } from '../components/ShowHideMessage'
-import { MyShowHideMessage } from '../components/MyShowHideMessage'
-import { MyProgressBar } from '../components/MyProgressBar'
+import { MyShowHideMessage } from '../components/myPractices/MyShowHideMessage'
+import { MyProgressBar } from '../components/myPractices/MyProgressBar'
+import Stopwatch from '../components/Stopwatch'
 
 export const routesPublic = [
   {
@@ -19,11 +20,15 @@ export const routesPublic = [
     element: <ProgressBar />,
   },
   {
-    path: "/myShowHideMessage",
+    path: "/stopwatch",
+    element: <Stopwatch />,
+  },
+  {
+    path: "/myPractices/myShowHideMessage",
     element: <MyShowHideMessage />,
   },
   {
-    path: "/myProgressBar",
+    path: "/myPractices/myProgressBar",
     element: <MyProgressBar />,
   },
   {

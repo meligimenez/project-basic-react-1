@@ -1,11 +1,11 @@
 import { Container, Row, Col, Button, Toast } from "react-bootstrap"
-import { useShow } from "../../hook/useShow"
+import { useShow } from "../../../hook/useShow"
 
 export const MyShowHideMessage = () => {
   const { show, handleShowMessage } = useShow(false)
 
   return (
-    <Container>
+    <Container style={{ height: '90vh', border: '2px solid red', backgroundImage: show ? 'url(https://s1.1zoom.me/big0/22/Penguins_Happy_Feet_Ice_565100_1280x800.jpg)' : 'none' }}>
       <Row className="mt-5">
         <Col xs={12} md={{ span: 6, offset: 3 }} className="text-center">
           <Button className="mb-2" variant={show ? 'danger' : 'success'} onClick={handleShowMessage} >

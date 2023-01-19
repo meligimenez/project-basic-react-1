@@ -4,11 +4,12 @@ import './myProgressBar.css'
 
 export const MyProgressBar = () => {
   const [now, setNow] = useState(0);
+  const [intervalState, setIntervalState] = useState(null)
   const inputRef = useRef(null)
 
   const handleDownload = () => {
     const valueInput = inputRef.current?.value
-    const interval = setInterval(() => {
+    let interval = setInterval(() => {
       setNow((now) => {
         if (now === +valueInput) {
           clearInterval(interval)
@@ -17,9 +18,11 @@ export const MyProgressBar = () => {
         return now + 1
       })
     }, 500);
+    setIntervalState(interval)
   }
 
   const handleReset = () => {
+    clearInterval(intervalState)
     setNow(0)
   }
 
