@@ -4,81 +4,54 @@ import { Button, ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
 
 const oneOrTwoNum = (num) => num > 9 ? num : `0${num}`;
 const pluralSingular = (num) => num > 1 ? 's' : '';
+const ONE_SECOND_TO_MILLISECOND = 1000
 
 export function StopwatchTimer() {
-  const [seconds, setSeconds] = useState(0)
-  const [minutes, setMinutes] = useState(0)
-  const [hours, setHours] = useState(0)
+  const timerInitialState = { seconds: 0, minutes: 0, hours: 0 };
+  const [timer, setTimer] = useState(timerInitialState);
 
   const [velocity, setVelocity] = useState(0)
   const [velocityName, setVelocityName] = useState('')
-
-  const [stateIntervalSeconds, setStateIntervalSeconds] = useState(null)
-  const [stateIntervalMinutes, setStateIntervalMinutes] = useState(null)
-  const [stateIntervalHours, setStateIntervalHours] = useState(null)
+  const [intervalState, setIntervalState] = useState(null);
 
   const handleStart = () => {
-    if (stateIntervalSeconds && stateIntervalMinutes && stateIntervalHours) {
-      return;
-    }
 
-    const intervalHours = setInterval(() => {
-      setHours((h) => {
-        return h + 1
-      })
-    }, velocity ? (61000 * 60) / velocity : (61000 * 60));
-
-    const intervalMinutes = setInterval(() => {
-      setMinutes((m) => {
-        if (m === 59) {
-          return 0
-        }
-        return m + 1
-      })
-    }, velocity ? 60000 / velocity : 60000);
-
-    const intervalSeconds = setInterval(() => {
-      setSeconds((s) => {
-        if (s === 59) {
-          return 0
-        }
-        return s + 1
-      })
-    }, velocity ? 1000 / velocity : 1000);
-
-    setStateIntervalHours(intervalHours)
-    setStateIntervalMinutes(intervalMinutes)
-    setStateIntervalSeconds(intervalSeconds)
-  }
+    const interval = setInterval(
+      () => {
+        setTimer((t) => {
+          if (t.seconds === 59) {
+            return { ...t, seconds: 0, minutes: t.minutes + 1 };
+          }
+          if (t.minutes === 59) {
+            return { ...t, minutes: 0, hours: t.hours + 1 };
+          }
+          return { ...t, seconds: t.seconds + 1 };
+        });
+      },
+      velocity ? ONE_SECOND_TO_MILLISECOND / velocity : ONE_SECOND_TO_MILLISECOND
+    );
+    setIntervalState(interval);
+  };
 
   const handleStop = () => {
-    if (!stateIntervalSeconds && !stateIntervalMinutes && !stateIntervalHours) {
+    if (!intervalState) {
+      console.log('No hay intervalo activo');
       return;
     }
-    clearInterval(stateIntervalHours)
-    clearInterval(stateIntervalMinutes)
-    clearInterval(stateIntervalSeconds)
-
-    setStateIntervalHours(null)
-    setStateIntervalMinutes(null)
-    setStateIntervalSeconds(null)
+    clearInterval(intervalState);
   }
 
   const handleReset = () => {
-    if (!stateIntervalSeconds && !stateIntervalMinutes && !stateIntervalHours) {
-      return;
-    }
-    handleStop()
-    setSeconds(0)
-    setMinutes(0)
-    setHours(0)
-
+    handleStop();
+    setTimer(timerInitialState);
   }
 
   const handleVelocity = (vel, velText) => {
-    setVelocity(vel)
-    setVelocityName(velText)
-    handleStop()
+    if (intervalState) {
+      handleStop()
+    }
+    setVelocity(vel);
+    setVelocityName(velText);
   }
 
   return (
@@ -102,11 +75,11 @@ export function StopwatchTimer() {
             <Card.Body>
               <Card.Title>Stopwatch / Timer </Card.Title>
               <Card.Text>
-                {oneOrTwoNum(hours)} hora{pluralSingular(hours)} - {minutes} minuto{pluralSingular(minutes)} - {seconds} segundo{pluralSingular(seconds)}
+                {oneOrTwoNum(timer.hours)} hora{pluralSingular(timer.hours)} -  {oneOrTwoNum(timer.minutes)}{''} minuto{pluralSingular(timer.minutes)} - {oneOrTwoNum(timer.seconds)} segundo{pluralSingular(timer.seconds)}
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              {oneOrTwoNum(hours)}:{minutes}:{seconds}
+              {oneOrTwoNum(timer.hours)}:{oneOrTwoNum(timer.minutes)}:{oneOrTwoNum(timer.seconds)}
             </Card.Footer>
           </Card>
         </Col>
