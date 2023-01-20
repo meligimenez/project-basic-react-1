@@ -15,6 +15,9 @@ export function StopwatchTimer() {
   const [intervalState, setIntervalState] = useState(null);
 
   const handleStart = () => {
+    if (intervalState) {
+      handleStop()
+    }
 
     const interval = setInterval(
       () => {
