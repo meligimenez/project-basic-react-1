@@ -22,7 +22,7 @@ export const Header = () => {
                 Progress Bar
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/stopwatch">
+              <NavDropdown.Item as={Link} to="/stopwatchTimer">
                 Stopwatch / Timmer
               </NavDropdown.Item>
               <NavDropdown.Divider />

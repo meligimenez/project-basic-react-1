@@ -20,14 +20,14 @@ export const MyShowHideMessage = () => {
   }
 
   return (
-    <Container style={{ height: '80vh', background: `url(${fondoImage})` }}>
+    <Container style={{ height: '80vh', background: `url(${fondoImage})`, backgroundSize: 'cover' }}>
       <Row className="mt-5">
         <Col xs={12} md={{ span: 6, offset: 3 }} className="text-center">
 
           <div className='d-flex justify-content-center grid gap-2 mt-2 mb-2'>
             <Form.Control ref={inputRef} placeholder='Ingrese su fondo'>
             </Form.Control>
-            <Button onClick={changeImg} style={{ backgroundColor: 'pink', border: '2px solid #ff009e' }}>Cambiar</Button>
+            <Button onClick={changeImg} style={{ backgroundColor: 'pink', border: '2px solid #ff009e', }}>Cambiar</Button>
           </div>
 
           <Button className="mb-2" variant={show ? 'danger' : 'info'} onClick={handleShowMessage} >
