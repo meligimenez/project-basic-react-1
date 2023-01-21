@@ -66,7 +66,6 @@ export function StopwatchTimer() {
             <Button variant="outline-danger" onClick={handleStop}>Detener</Button>
             <Button variant="outline-dark" onClick={handleReset}>Reiniciar</Button>
           </ButtonGroup>
-          {velocity}
           <ButtonGroup aria-label="Basic example">
             <Button variant="outline-dark" className={velocityName === 'min' && 'active'} onClick={() => handleVelocity(0, 'min')} >Min</Button>
             <Button variant="outline-dark" className={velocityName === 'x2' && 'active'} onClick={() => handleVelocity(2, 'x2')} >x2</Button>

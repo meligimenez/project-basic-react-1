@@ -26,7 +26,7 @@ export const Header = () => {
                 Stopwatch / Timmer
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/">
+              <NavDropdown.Item as={Link} to="/taskManager">
                 Task Manager
               </NavDropdown.Item>
             </NavDropdown>
